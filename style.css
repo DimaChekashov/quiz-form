@@ -75,3 +75,50 @@
 .quiz-alert-icon {
     margin-right: 10px;
 }
+
+/* checkbox */
+
+.quiz-checkbox input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	margin: 10px 0 0 20px;
+}
+.quiz-checkbox-text {
+	position: relative;
+	padding: 0 0 0 35px;
+	cursor: pointer;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.67;
+    color: #000000;
+    margin-bottom: 8px;
+}
+.quiz-checkbox-text:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+    background: #070707;
+}
+
+.quiz-checkbox-text:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+    background: #F5F5F5;
+    opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+
+}
+
+.quiz-checkbox input:checked + .quiz-checkbox-text:after {
+    opacity: 1;
+}
