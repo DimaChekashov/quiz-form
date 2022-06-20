@@ -5,11 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz-form</title>
+    <link rel="stylesheet" href="./demo.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div>
-        Quiz-form
+    <div class="container">
+        <h1 class="demo-title">
+            Quiz-form Examples
+        </h1>
+        
+
+        <div class="quiz">
+            <div class="quiz-heading">
+                Париж является столицей государства:
+            </div>
+            <div class="quiz-text">
+                Выберите правильный ответ
+            </div>
+            <button type="button" class="quiz-button">
+                Проверить
+            </button>
+            <input type="text" class="quiz-input" />
+            <div class="quiz-alert">
+                <span class="quiz-alert-icon">✅</span> Верно, средний чек по клиентам из Москвы - 5,78
+            </div>
+            <div class="quiz-alert">
+                <span class="quiz-alert-icon">❌</span> Кажется что-то не то, ответ неверный, попробуйте еще раз.
+            </div>
+        </div>
     </div>
     
     <script src="./quiz-form.js"></script>
