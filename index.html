@@ -87,7 +87,7 @@
 
         <form 
             class="quiz"
-            id="paris-town"
+            id="WAY_COURSE_TASK_QUIZ"
             form-type="single"
             quiz-form
         >
@@ -138,7 +138,6 @@
                 <div class="quiz-alert quiz-hide" alert-error>
                     На самом деле столицей Франции является Париж. Будьте внимательнее!
                 </div>
-
             </div>
         </form>
 
@@ -167,7 +166,12 @@
             Несколько правильных ответов
         </h2>
 
-        <div class="quiz">
+        <form
+            class="quiz"
+            id="pasta"
+            form-type="multipy"
+            quiz-form
+        >
             <div class="quiz-heading">
                 Укажите все ингредиенты для приготовления макарон
             </div>
@@ -177,39 +181,46 @@
             </div>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" />
+                <input type="checkbox" checkbox-success/>
                 <div class="quiz-checkbox-text">
                     Макароны
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" />
+                <input type="checkbox" checkbox-error />
                 <div class="quiz-checkbox-text">
                     Огурец
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" />
+                <input type="checkbox" checkbox-success />
                 <div class="quiz-checkbox-text">
                     Масло
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" />
+                <input type="checkbox" checkbox-error />
                 <div class="quiz-checkbox-text">
                     Оливки
                 </div>
             </label>
 
             <div class="quiz-footer">
-                <button type="button" class="quiz-button">
+                <button type="submit" class="quiz-button">
                     Проверить
                 </button>
+
+                <div class="quiz-alert quiz-hide" alert-success>
+                    Все верно, для приготовления макарон нам понадобятся макароны и масло.
+                </div>
+                <div class="quiz-alert quiz-hide" alert-error>
+                    Частично верно, для приготовления макарон нам понадобятся макароны и масло, но не понадобятся огурцы и оливки. 
+                </div>
             </div>
-        </div>
+        </form>
 
     </div>
     
