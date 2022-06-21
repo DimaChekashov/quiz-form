@@ -74,6 +74,7 @@ const quizForm = (formId, formType) => {
             e.preventDefault();
 
             button.classList.add("quiz-hide");
+            form.classList.add("completed");
 
             checkAnswer(formId, input).then((data) => {
                 if (data.correct) {
@@ -108,6 +109,7 @@ const quizForm = (formId, formType) => {
                             if (!res.correct) {
                                 button.classList.add("quiz-hide");
                                 alertError.classList.remove("quiz-hide");
+                                form.classList.add("completed");
                             }
                             statuses[i] = res.correct;
                         }
@@ -120,6 +122,7 @@ const quizForm = (formId, formType) => {
                                 statuses[3]
                             ) {
                                 button.classList.add("quiz-hide");
+                                form.classList.add("completed");
                                 alertSuccess.classList.remove("quiz-hide");
                             }
                         }
