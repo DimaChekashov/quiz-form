@@ -85,7 +85,12 @@
             Один правильный ответ
         </h2>
 
-        <div class="quiz">
+        <form 
+            class="quiz"
+            id="paris-town"
+            form-type="single"
+            quiz-form
+        >
             <div class="quiz-heading">
                 Париж является столицей государства:
             </div>
@@ -95,39 +100,47 @@
             </div>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" />
+                <input type="radio" name="which-town"  checkbox-success required />
                 <div class="quiz-checkbox-text">
                     Франция
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" />
+                <input type="radio" name="which-town" checkbox-error />
                 <div class="quiz-checkbox-text">
                     Германия
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" />
+                <input type="radio" name="which-town" checkbox-error />
                 <div class="quiz-checkbox-text">
                     Италия
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" />
+                <input type="radio" name="which-town" checkbox-error />
                 <div class="quiz-checkbox-text">
                     Россия
                 </div>
             </label>
 
             <div class="quiz-footer">
-                <button type="button" class="quiz-button">
+                <button type="submit" class="quiz-button">
                     Проверить
                 </button>
+
+                <div class="quiz-alert quiz-hide" alert-success>
+                    Верно, Париж и в правду является столицей Франции!
+                </div>
+                <div class="quiz-alert quiz-hide" alert-error>
+                    На самом деле столицей Франции является Париж. Будьте внимательнее!
+                </div>
+
             </div>
-        </div>
+        </form>
 
         <h2 class="demo-title">
             Один правильный ответ
