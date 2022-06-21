@@ -87,7 +87,7 @@
 
         <form 
             class="quiz"
-            id="WAY_COURSE_TASK_QUIZ"
+            id="ds_da_task1_quiz"
             form-type="single"
             quiz-form
         >
@@ -100,28 +100,28 @@
             </div>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town"  checkbox-success required />
+                <input type="radio" name="which-town" count="1" checkbox-success required />
                 <div class="quiz-checkbox-text">
                     Франция
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" checkbox-error />
+                <input type="radio" name="which-town" count="2" />
                 <div class="quiz-checkbox-text">
                     Германия
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" checkbox-error />
+                <input type="radio" name="which-town" count="3" />
                 <div class="quiz-checkbox-text">
                     Италия
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="radio" name="which-town" checkbox-error />
+                <input type="radio" name="which-town" count="4" />
                 <div class="quiz-checkbox-text">
                     Россия
                 </div>
@@ -142,10 +142,15 @@
         </form>
 
         <h2 class="demo-title">
-            Один правильный ответ
+            Ввод правильного ответа
         </h2>
 
-        <div class="quiz">
+        <form
+            class="quiz"
+            id="WAY_COURSE_TASK_QUIZ-2"
+            form-type="input"
+            quiz-form
+        >
             <div class="quiz-heading">
                 Вставьте в поле ниже ваш вариант ответа
             </div>
@@ -155,12 +160,21 @@
             </div>
 
             <div class="quiz-group">
-                <input type="text" class="quiz-input" />
-                <button type="button" class="quiz-button">
+                <input type="text" class="quiz-input" required />
+                <button type="submit" class="quiz-button">
                     Проверить
                 </button>
             </div>
-        </div>
+
+            <div class="quiz-footer">
+                <div class="quiz-alert quiz-hide" alert-success>
+                    <span class="quiz-alert-icon">✅</span> Верно, средний чек по клиентам из Москвы - 5,78
+                </div>
+                <div class="quiz-alert quiz-hide" alert-error>
+                    <span class="quiz-alert-icon">❌</span> Кажется что-то не то, ответ неверный, попробуйте еще раз.
+                </div>
+            </div>
+        </form>
 
         <h2 class="demo-title">
             Несколько правильных ответов
@@ -168,7 +182,7 @@
 
         <form
             class="quiz"
-            id="pasta"
+            id="ds_da_task1_quiz2"
             form-type="multipy"
             quiz-form
         >
@@ -181,28 +195,28 @@
             </div>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" checkbox-success/>
+                <input type="checkbox" count="1" checkbox-success />
                 <div class="quiz-checkbox-text">
                     Макароны
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" checkbox-error />
+                <input type="checkbox" count="2" />
                 <div class="quiz-checkbox-text">
                     Огурец
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" checkbox-success />
+                <input type="checkbox" count="3" checkbox-success />
                 <div class="quiz-checkbox-text">
                     Масло
                 </div>
             </label>
 
             <label class="quiz-checkbox">
-                <input type="checkbox" checkbox-error />
+                <input type="checkbox" count="4" />
                 <div class="quiz-checkbox-text">
                     Оливки
                 </div>

@@ -4,6 +4,18 @@ const QUIZ_TYPE = {
     multipy: "multipy",
 };
 
+const checkAnswer = async (id, variant) => {
+    const response = await fetch("https://rebrainme.com/quiz-checker", {
+        method: "POST",
+        body: JSON.stringify({
+            quiz_id: id,
+            answer_id: variant,
+        }),
+    });
+
+    return response.json();
+};
+
 const quizForm = (formId, formType) => {
     const form = document.getElementById(formId);
     const button = document.querySelector("#" + formId + " .quiz-button");
@@ -27,57 +39,92 @@ const quizForm = (formId, formType) => {
     }
 
     function quizSingle() {
-        const radio = document.querySelector(
-            "#" + formId + " .quiz-checkbox input[checkbox-success]"
+        const radios = document.querySelectorAll(
+            "#" + formId + " .quiz-checkbox input"
         );
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            button.classList.add("quiz-hide");
+            button.innerText = "Загрузка";
 
-            if (radio.checked) {
-                alertSuccess.classList.remove("quiz-hide");
-            } else {
-                alertError.classList.remove("quiz-hide");
-            }
+            radios.forEach((radio) => {
+                if (radio.checked) {
+                    checkAnswer(formId, +radio.getAttribute("count")).then(
+                        (res) => {
+                            button.classList.add("quiz-hide");
+
+                            if (res.correct) {
+                                alertSuccess.classList.remove("quiz-hide");
+                            } else {
+                                alertError.classList.remove("quiz-hide");
+                            }
+                        }
+                    );
+                }
+            });
         });
     }
 
     function quizInput() {
-        
-    }
-
-    function quizMultipy() {
-        const checkboxsError = document.querySelectorAll(
-            "#" + formId + " .quiz-checkbox input[checkbox-error]"
-        );
-        const checkboxsSuccess = document.querySelectorAll(
-            "#" + formId + " .quiz-checkbox input[checkbox-success]"
-        );
-        let statusOne,
-            statusSecond,
-            statusThird = true;
+        const input = document.querySelector(".quiz-input");
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            statusOne = checkboxsSuccess[0].checked;
-            statusSecond = checkboxsSuccess[1].checked;
-
-            checkboxsError.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    statusThird = false;
-                }
-            });
-
             button.classList.add("quiz-hide");
 
-            if (statusOne && statusSecond && statusThird) {
-                alertSuccess.classList.remove("quiz-hide");
-            } else {
-                alertError.classList.remove("quiz-hide");
-            }
+            checkAnswer(formId, input).then((data) => {
+                if (data.correct) {
+                    alertSuccess.classList.remove("quiz-hide");
+                } else {
+                    alertError.classList.remove("quiz-hide");
+                }
+            });
+        });
+    }
+
+    function quizMultipy() {
+        const statuses = {
+            0: true,
+            1: true,
+            2: true,
+            3: true,
+        };
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const checkboxs = document.querySelectorAll(
+                "#" + formId + " .quiz-checkbox input"
+            );
+
+            button.innerText = "Загрузка";
+
+            checkboxs.forEach((checkbox, i) => {
+                checkAnswer(formId, +checkbox.getAttribute("count")).then(
+                    (res) => {
+                        if (checkbox.checked) {
+                            if (!res.correct) {
+                                button.classList.add("quiz-hide");
+                                alertError.classList.remove("quiz-hide");
+                            }
+                            statuses[i] = res.correct;
+                        }
+
+                        if (checkboxs.length === i + 1) {
+                            if (
+                                statuses[0] &&
+                                statuses[1] &&
+                                statuses[2] &&
+                                statuses[3]
+                            ) {
+                                button.classList.add("quiz-hide");
+                                alertSuccess.classList.remove("quiz-hide");
+                            }
+                        }
+                    }
+                );
+            });
         });
     }
 };
