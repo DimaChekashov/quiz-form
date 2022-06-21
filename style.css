@@ -17,6 +17,10 @@
     margin-bottom: 40px;
 }
 
+.quiz.completed .quiz-checkbox::before{
+    opacity: 1;
+}
+
 .quiz-heading {
     font-weight: 700;
     font-size: 30px;
@@ -101,6 +105,27 @@
 
 /* checkbox */
 
+.quiz-checkbox {
+    position: relative;
+    margin: 0 0 8px 40px;
+}
+
+.quiz-checkbox::before {
+    content: "❌";
+    display: inline-block;
+    position: absolute;
+    font-size: 20px;
+    line-height: 1.25;
+    left: -40px;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.quiz-checkbox[checkbox-success]::before {
+    content: "✅";
+}
+
 .quiz-checkbox input {
 	position: absolute;
 	z-index: -1;
@@ -115,7 +140,6 @@
     font-size: 15px;
     line-height: 1.67;
     color: #000000;
-    margin-bottom: 8px;
 }
 .quiz-checkbox-text:before {
 	content: '';

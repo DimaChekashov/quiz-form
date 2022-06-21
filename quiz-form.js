@@ -53,6 +53,7 @@ const quizForm = (formId, formType) => {
                     checkAnswer(formId, +radio.getAttribute("count")).then(
                         (res) => {
                             button.classList.add("quiz-hide");
+                            form.classList.add("completed");
 
                             if (res.correct) {
                                 alertSuccess.classList.remove("quiz-hide");
