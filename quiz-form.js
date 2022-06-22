@@ -87,43 +87,49 @@ const quizForm = (formId, formType) => {
     }
 
     function quizMultipy() {
-        const statuses = {
-            0: true,
-            1: true,
-            2: true,
-            3: true,
-        };
+        const statuses = {};
+        let rightVariantCount = 1;
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const checkboxs = document.querySelectorAll(
                 "#" + formId + " .quiz-checkbox input"
             );
+            let statusCount = checkboxs.length;
 
             button.innerText = "Загрузка";
 
             checkboxs.forEach((checkbox, i) => {
                 checkAnswer(formId, +checkbox.getAttribute("count")).then(
                     (res) => {
-                        if (checkbox.checked) {
-                            if (!res.correct) {
-                                button.classList.add("quiz-hide");
-                                alertError.classList.remove("quiz-hide");
-                                form.classList.add("completed");
-                            }
-                            statuses[i] = res.correct;
-                        }
+                        statuses[i] = {
+                            status: res.correct,
+                            checked: checkbox.checked,
+                        };
+                        statusCount--;
 
-                        if (checkboxs.length === i + 1) {
-                            if (
-                                statuses[0] &&
-                                statuses[1] &&
-                                statuses[2] &&
-                                statuses[3]
-                            ) {
-                                button.classList.add("quiz-hide");
-                                form.classList.add("completed");
+                        if (statusCount <= 0) {
+                            for (let key in statuses) {
+                                if (
+                                    statuses[key].status ===
+                                        statuses[key].checked &&
+                                    statuses[key].status === true
+                                ) {
+                                    rightVariantCount--;
+                                } else if (
+                                    statuses[key].status === false &&
+                                    statuses[key].checked
+                                ) {
+                                    rightVariantCount++;
+                                }
+                            }
+
+                            button.classList.add("quiz-hide");
+                            form.classList.add("completed");
+                            if (rightVariantCount <= 0) {
                                 alertSuccess.classList.remove("quiz-hide");
+                            } else {
+                                alertError.classList.remove("quiz-hide");
                             }
                         }
                     }
