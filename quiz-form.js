@@ -46,20 +46,15 @@ const quizForm = (formId, formType) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            button.innerText = "Загрузка";
+            btnLoading();
 
             radios.forEach((radio) => {
                 if (radio.checked) {
                     checkAnswer(formId, +radio.getAttribute("count")).then(
                         (res) => {
-                            button.classList.add("quiz-hide");
-                            form.classList.add("completed");
+                            comleteQuiz();
 
-                            if (res.correct) {
-                                alertSuccess.classList.remove("quiz-hide");
-                            } else {
-                                alertError.classList.remove("quiz-hide");
-                            }
+                            showAlerts(res.correct);
                         }
                     );
                 }
@@ -73,15 +68,12 @@ const quizForm = (formId, formType) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            button.classList.add("quiz-hide");
-            form.classList.add("completed");
+            btnLoading();
+
+            comleteQuiz();
 
             checkAnswer(formId, input).then((data) => {
-                if (data.correct) {
-                    alertSuccess.classList.remove("quiz-hide");
-                } else {
-                    alertError.classList.remove("quiz-hide");
-                }
+                showAlerts(data.correct);
             });
         });
     }
@@ -97,7 +89,7 @@ const quizForm = (formId, formType) => {
             );
             let statusCount = checkboxs.length;
 
-            button.innerText = "Загрузка";
+            btnLoading();
 
             checkboxs.forEach((checkbox, i) => {
                 checkAnswer(formId, +checkbox.getAttribute("count")).then(
@@ -123,19 +115,31 @@ const quizForm = (formId, formType) => {
                                     rightVariantCount++;
                                 }
                             }
-
-                            button.classList.add("quiz-hide");
-                            form.classList.add("completed");
-                            if (rightVariantCount <= 0) {
-                                alertSuccess.classList.remove("quiz-hide");
-                            } else {
-                                alertError.classList.remove("quiz-hide");
-                            }
+                            
+                            comleteQuiz();
+                            showAlerts(rightVariantCount <= 0);
                         }
                     }
                 );
             });
         });
+    }
+
+    function showAlerts(condition) {
+        if (condition) {
+            alertSuccess.classList.remove("quiz-hide");
+        } else {
+            alertError.classList.remove("quiz-hide");
+        }
+    }
+
+    function btnLoading() {
+        button.innerText = "Проверка";
+    }
+
+    function comleteQuiz() {
+        button.classList.add("quiz-hide");
+        form.classList.add("completed");
     }
 };
 
