@@ -50,7 +50,7 @@ const quizForm = (formId, formType) => {
 
             radios.forEach((radio) => {
                 if (radio.checked) {
-                    checkAnswer(formId, +radio.getAttribute("count")).then(
+                    checkAnswer(formId, radio.getAttribute("count")).then(
                         (res) => {
                             comleteQuiz();
 
@@ -63,7 +63,7 @@ const quizForm = (formId, formType) => {
     }
 
     function quizInput() {
-        const input = document.querySelector(".quiz-input");
+        const input = document.querySelector("#" + formId + " .quiz-input");
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -72,7 +72,7 @@ const quizForm = (formId, formType) => {
 
             comleteQuiz();
 
-            checkAnswer(formId, input).then((data) => {
+            checkAnswer(formId, input.value).then((data) => {
                 showAlerts(data.correct);
             });
         });
@@ -92,7 +92,7 @@ const quizForm = (formId, formType) => {
             btnLoading();
 
             checkboxs.forEach((checkbox, i) => {
-                checkAnswer(formId, +checkbox.getAttribute("count")).then(
+                checkAnswer(formId, checkbox.getAttribute("count")).then(
                     (res) => {
                         statuses[i] = {
                             status: res.correct,
@@ -115,7 +115,7 @@ const quizForm = (formId, formType) => {
                                     rightVariantCount++;
                                 }
                             }
-                            
+
                             comleteQuiz();
                             showAlerts(rightVariantCount <= 0);
                         }
@@ -145,6 +145,27 @@ const quizForm = (formId, formType) => {
 
 const quizForms = document.querySelectorAll("[quiz-form]");
 
-quizForms.forEach((form) =>
-    quizForm(form.getAttribute("id"), form.getAttribute("form-type"))
-);
+if (quizForms) {
+    quizForms.forEach((form) =>
+        quizForm(form.getAttribute("id"), form.getAttribute("form-type"))
+    );
+}
+
+const showBtns = document.querySelectorAll("[show-hide-block]");
+
+if (showBtns) {
+    showBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            document
+                .querySelector(
+                    `[hide-block="${btn.getAttribute("show-hide-block")}"]`
+                )
+                .classList.add("show-hide-block");
+            document.querySelector(
+                `[hide-block="${btn.getAttribute("show-hide-block")}"]`
+            ).scrollIntoView({behavior: "smooth", block: "start"});
+        });
+    });
+}

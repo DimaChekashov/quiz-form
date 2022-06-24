@@ -169,3 +169,41 @@
 .quiz-checkbox input:checked + .quiz-checkbox-text:after {
     opacity: 1;
 }
+
+/* quiz show block */
+
+[hide-block] {
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, max-height 0.5s ease-in-out;
+}
+
+[hide-block].show-hide-block {
+    visibility: visible;
+    opacity: 1;
+    max-height: 100%;
+}
+
+.hide-block-button {
+    font-family: "Monda", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    background: #82FDDB;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+    padding: 20px 23px;
+    transition: background 0.3s ease-in-out;
+}
+
+.hide-block-button:hover {
+    background: #00d79a;
+}
+
+.hide-block-button-container {
+    text-align: center;
+    padding: 20px 0;
+}
