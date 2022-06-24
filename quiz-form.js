@@ -157,15 +157,15 @@ if (showBtns) {
     showBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
-
-            document
-                .querySelector(
-                    `[hide-block="${btn.getAttribute("show-hide-block")}"]`
-                )
-                .classList.add("show-hide-block");
-            document.querySelector(
+            const block = document.querySelector(
                 `[hide-block="${btn.getAttribute("show-hide-block")}"]`
-            ).scrollIntoView({behavior: "smooth", block: "start"});
+            );
+
+            block.classList.add("show-hide-block");
+
+            setTimeout(() => {
+                block.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 100);
         });
     });
 }
