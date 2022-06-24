@@ -207,3 +207,24 @@
     text-align: center;
     padding: 20px 0;
 }
+
+@media screen and (max-width: 700px) {
+    .quiz {
+        padding: 25px 20px 15px;
+    }
+
+    .quiz-heading {
+        font-size: 24px;
+    }
+
+    .quiz-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .quiz-input {
+        width: 100%;
+        max-width: 100%;
+    }
+}
