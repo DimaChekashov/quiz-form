@@ -93,6 +93,13 @@ const quizForm = (formId, formType) => {
             checkboxs.forEach((checkbox, i) => {
                 checkAnswer(formId, checkbox.getAttribute("count")).then(
                     (res) => {
+                        if (res.correct) {
+                            checkbox.parentElement.setAttribute(
+                                "checkbox-success",
+                                ""
+                            );
+                        }
+
                         statuses[i] = {
                             status: res.correct,
                             checked: checkbox.checked,
