@@ -68,12 +68,11 @@ const quizForm = (formId, formType) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            btnLoading();
-
-            comleteQuiz();
-
             checkAnswer(formId, input.value).then((data) => {
                 showAlerts(data.correct);
+                if (data.correct) {
+                    comleteQuiz();
+                }
             });
         });
     }
@@ -127,8 +126,10 @@ const quizForm = (formId, formType) => {
 
     function showAlerts(condition) {
         if (condition) {
+            alertError.classList.add("quiz-hide");
             alertSuccess.classList.remove("quiz-hide");
         } else {
+            alertSuccess.classList.add("quiz-hide");
             alertError.classList.remove("quiz-hide");
         }
     }

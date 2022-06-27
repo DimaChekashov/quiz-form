@@ -163,7 +163,6 @@
     background: #F5F5F5;
     opacity: 0;
 	transition: opacity 0.2s ease-in-out;
-
 }
 
 .quiz-checkbox input:checked + .quiz-checkbox-text:after {
