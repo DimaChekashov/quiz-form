@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #101010;
+    background-color: #1F1F21;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     padding: 30px 0;
@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 900px;
     padding: 0 20px;
     margin: 0 auto;
 }
