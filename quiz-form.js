@@ -172,7 +172,10 @@ if (showBtns) {
             block.classList.add("show-hide-block");
 
             setTimeout(() => {
-                block.scrollIntoView({ behavior: "smooth", block: "start" });
+                window.scrollTo({
+                    top: block.offsetTop + +btn.getAttribute("topPixel"),
+                    behavior: "smooth",
+                });
             }, 100);
         });
     });
