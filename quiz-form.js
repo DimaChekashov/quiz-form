@@ -1,5 +1,5 @@
 const QUIZ_TYPE = {
-    sigle: "single",
+    default: "default",
     input: "input",
     multipy: "multipy",
 };
@@ -9,7 +9,7 @@ const checkAnswer = async (id, variant) => {
         method: "POST",
         body: JSON.stringify({
             quiz_id: id,
-            answer_id: variant,
+            answer_ids: variant,
         }),
     });
 
@@ -27,39 +27,12 @@ const quizForm = (formId, formType) => {
     );
 
     switch (formType) {
-        case QUIZ_TYPE.sigle:
-            quizSingle();
+        case QUIZ_TYPE.default:
+            quizCheckboxRadio();
             break;
         case QUIZ_TYPE.input:
             quizInput();
             break;
-        case QUIZ_TYPE.multipy:
-            quizMultipy();
-            break;
-    }
-
-    function quizSingle() {
-        const radios = document.querySelectorAll(
-            "#" + formId + " .quiz-checkbox input"
-        );
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            btnLoading();
-
-            radios.forEach((radio) => {
-                if (radio.checked) {
-                    checkAnswer(formId, radio.getAttribute("count")).then(
-                        (res) => {
-                            comleteQuiz();
-
-                            showAlerts(res.correct);
-                        }
-                    );
-                }
-            });
-        });
     }
 
     function quizInput() {
@@ -68,65 +41,65 @@ const quizForm = (formId, formType) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            checkAnswer(formId, input.value).then((data) => {
-                showAlerts(data.correct);
-                if (data.correct) {
+            checkAnswer(formId, [input.value]).then((data) => {
+                const result = data.correct[input.value];
+                showAlerts(result);
+                if (result) {
                     comleteQuiz();
                 }
             });
         });
     }
 
-    function quizMultipy() {
-        const statuses = {};
-        let rightVariantCount = 1;
-
+    function quizCheckboxRadio() {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const checkboxs = document.querySelectorAll(
                 "#" + formId + " .quiz-checkbox input"
             );
-            let statusCount = checkboxs.length;
+            const checkboxAtributesAll = [];
+            const selected = [];
+
+            checkboxs.forEach((checkbox) => {
+                const id = checkbox.getAttribute("id");
+
+                checkboxAtributesAll.push(id);
+
+                if (checkbox.checked) {
+                    selected.push(id);
+                }
+            });
 
             btnLoading();
 
-            checkboxs.forEach((checkbox, i) => {
-                checkAnswer(formId, checkbox.getAttribute("count")).then(
-                    (res) => {
-                        if (res.correct) {
-                            checkbox.parentElement.setAttribute(
-                                "checkbox-success",
-                                ""
-                            );
-                        }
+            checkAnswer(formId, checkboxAtributesAll).then((res) => {
+                if (res.status === "ok") {
+                    const correctAnswers = new Set();
 
-                        statuses[i] = {
-                            status: res.correct,
-                            checked: checkbox.checked,
-                        };
-                        statusCount--;
+                    for (let answer in res.correct) {
+                        if (res.correct[answer]) {
+                            correctAnswers.add(answer);
 
-                        if (statusCount <= 0) {
-                            for (let key in statuses) {
-                                if (
-                                    statuses[key].status ===
-                                        statuses[key].checked &&
-                                    statuses[key].status === true
-                                ) {
-                                    rightVariantCount--;
-                                } else if (
-                                    statuses[key].status === false &&
-                                    statuses[key].checked
-                                ) {
-                                    rightVariantCount++;
-                                }
-                            }
-
-                            comleteQuiz();
-                            showAlerts(rightVariantCount <= 0);
+                            document
+                                .querySelector(
+                                    "#" +
+                                        formId +
+                                        " .quiz-checkbox input#" +
+                                        answer
+                                )
+                                .parentElement.setAttribute(
+                                    "checkbox-success",
+                                    ""
+                                );
                         }
                     }
-                );
+
+                    comleteQuiz();
+                    showAlerts(
+                        selected.length === correctAnswers.size &&
+                            selected.every((id) => correctAnswers.has(id))
+                    );
+                }
             });
         });
     }
