@@ -208,7 +208,6 @@
 /* quiz show block */
 
 [hide-block] {
-    padding-top: 70px;
     overflow: hidden;
     visibility: hidden;
     opacity: 0;
