@@ -205,6 +205,69 @@
     border-color: #5BFFDA;
 }
 
+/* light theme */
+body.light-theme .quiz {
+    background: #DBDCE1;
+    color: #191919;
+}
+
+body.light-theme .quiz-text {
+    color: #191919;
+}
+
+body.light-theme .quiz-checkbox-text {
+    color: #191919;
+}
+
+body.light-theme .quiz-checkbox-text:before {
+    border-color: #878B9C;
+}
+
+body.light-theme .quiz-checkbox input:checked + .quiz-checkbox-text::before, 
+body.light-them .quiz-checkbox input:focus + .quiz-checkbox-text::before {
+    border-color: #08156B;
+}
+
+body.light-theme .quiz-checkbox-text:after {
+    background-color: #08156B;
+}
+
+body.light-theme .quiz-alert {
+    background: #18181A;
+    color: #EFF1F9;
+}
+
+body.light-theme .quiz-button {
+    background-color: #08156B;
+    color: #EFF1F9;
+}
+
+body.light-theme .quiz-button:hover {
+    background-color: #081ca3;
+}
+
+body.light-theme .quiz-input {
+    border-color: #878B9C;
+    color: #000;
+}
+
+body.light-theme .quiz-input:focus {
+    border-color: #081ca3;
+}
+
+body.light-theme .quiz-input::placeholder {
+    color: #878B9C;
+}
+
+body.light-theme .hide-block-button {
+    background-color: #08156B;
+    color: #EFF1F9;
+}
+
+body.light-theme .hide-block-button:hover {
+    background-color: #081ca3;
+}
+
 /* quiz show block */
 
 [hide-block] {
