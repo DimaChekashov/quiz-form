@@ -1,6 +1,7 @@
 const QUIZ_TYPE = {
     default: "default",
     input: "input",
+    inputSelfAnswer: "input-self-answer",
     multipy: "multipy",
 };
 
@@ -33,6 +34,9 @@ const quizForm = (formId, formType) => {
         case QUIZ_TYPE.input:
             quizInput();
             break;
+        case QUIZ_TYPE.inputSelfAnswer:
+            quizInputSelfAnswer();
+            break;
     }
 
     function quizInput() {
@@ -48,6 +52,14 @@ const quizForm = (formId, formType) => {
                     comleteQuiz();
                 }
             });
+        });
+    }
+
+    function quizInputSelfAnswer() {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alertSuccess.classList.remove("quiz-hide");
+            comleteQuiz();
         });
     }
 
